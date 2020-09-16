@@ -53,7 +53,6 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
     - Select `Bitbucket Server`
     - Use the credentials that were set up above
     - Project name is `CICD`
-- 
 
 
 ## Configuring Continuous Integration (Bitbucket)
