@@ -27,6 +27,7 @@ echo "Starting GitLab..."
 docker run --name gitlab --detach \
   --network cicd \
   --privileged \
+  --env GITLAB_ROOT_EMAIL=adam.arold@gmail.com \
   --hostname localhost \
   --env GITLAB_OMNIBUS_CONFIG="external_url 'http://localhost'; gitlab_rails['lfs_enabled'] = true;" \
   --publish 8443:443 --publish 8082:80 --publish 22:22 \
