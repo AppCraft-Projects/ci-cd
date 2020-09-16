@@ -61,3 +61,4 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 - In *Jenkins* go to `Manage Jenkins > Configure Global Security`
 - Select `Project-based Matrix Authorization Strategy` under `Authorization`
 - Set permission for Anonymous User to `Read`, `Create` and `Build`e
+
