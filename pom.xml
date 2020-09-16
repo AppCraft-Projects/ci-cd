@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cicd</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>ci-cd-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
 	<description>CI/CD Demo Project</description>
