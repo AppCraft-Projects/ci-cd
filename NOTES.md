@@ -15,7 +15,7 @@
 docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 - Select the plugins you need on the installation screen
-- Create an administrator user
+- Create an administrator user using password `bwD2!b8BJGEHz6H`
 
 > Note: use the same email + password combination throughout this tutorial!
 > Also create a ssh key for that email!
@@ -61,4 +61,3 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 - In *Jenkins* go to `Manage Jenkins > Configure Global Security`
 - Select `Project-based Matrix Authorization Strategy` under `Authorization`
 - Set permission for Anonymous User to `Read`, `Create` and `Build`
-
