@@ -62,6 +62,7 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 - Select `Project-based Matrix Authorization Strategy` under `Authorization`
 - Set permission for Anonymous User to `Read`, `Create` and `Build`e
 
+
 ## Configuring Continuous Integration (Bitbucket)
 
 
