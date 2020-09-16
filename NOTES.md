@@ -47,12 +47,20 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
     - Use the personal access token created above
     - Create a credential using your Bitbucket *username* and *password*
 - Click **Save**
-- Create a new *Pipeline* with name `CICD`
-    - In *Build Triggers* select `Bitbucket Server trigger build after push`
-    - In *Pipeline* select `Pipeline script from SCM`
-    - Select `Bitbucket Server`
-    - Use the credentials that were set up above
-    - Project name is `CICD`
+- Create a new *Multibranch Pipeline* with name `CICD`
+    - In *Branch Sources* use the previously configured Bitbucket Server
+    - In *Build Configuration* use mode `by Jenkinsfile`
+    - In *Scan Multibranch Pipeline Triggers* select `Bitbucket Server trigger scan after push`
+- This will trigger a *build*
+- Now let's check the webhook that was created
+- Test it and it will fail
+- Check the running *Docker* process with `docker ps`
+- Check the logs with `docker logs bitbucket --follow`
+- Log into the *Bitbucket* server with `docker exec -it bitbucket bash`
+- Try to `curl` the target server (we'll see an authentication problem)
+- In *Jenkins* go to `Manage Jenkins > Configure Global Security`
+- Select `Project-based Matrix Authorization Strategy` under `Authorization`
+- Set permission for Anonymous User to `Read`, `Create` and `Build`e
 
 
 ## Configuring Continuous Integration (Bitbucket)
