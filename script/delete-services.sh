@@ -6,9 +6,10 @@ bash ./stop-services.sh
 echo "Deleting containers..."
 docker container rm jenkins-docker
 docker container rm jenkins-blueocean
-docker container rm gitlab
+docker container rm bitbucket
+docker container rm sonarqube
 
-echo "Cleaning up Jenkins resources..."
-docker network rm cicd || true
-docker volume rm jenkins-docker-certs || true
-docker volume rm jenkins-data || true
+echo "Cleaning up resources..."
+docker network rm cicd
+docker volume rm jenkins-docker-certs
+docker volume rm jenkins-data

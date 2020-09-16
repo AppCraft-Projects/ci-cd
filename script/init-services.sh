@@ -32,3 +32,9 @@ docker run --name bitbucket --detach \
   --publish 7990:7990 \
   --publish 7999:7999 \
   atlassian/bitbucket-server \
+
+
+docker run --name sonarqube --detach \
+  --network cicd \
+  --publish 9000:9000 \
+  sonarqube/7.9.4-community
