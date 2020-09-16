@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'jdk-8'
+            image 'openjdk:8'
             args '--volume /root/.m2:/root/.m2'
         }
     }
