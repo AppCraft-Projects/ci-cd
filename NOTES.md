@@ -60,4 +60,5 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 - Try to `curl` the target server (we'll see an authentication problem)
 - In *Jenkins* go to `Manage Jenkins > Configure Global Security`
 - Select `Project-based Matrix Authorization Strategy` under `Authorization`
-- Set permission for Anonymous User to `Read`, `Create` and `Build`e
+- Set permission for Anonymous User to `Read`, `Create` and `Build`
+
