@@ -1,3 +1,4 @@
-echo "Stopping Jenkins..."
-docker container stop jenkins-docker || true
-docker container stop jenkins-blueocean || true
+echo "Stopping services..."
+docker container stop jenkins-docker
+docker container stop jenkins-blueocean
+docker container stop gitlab
