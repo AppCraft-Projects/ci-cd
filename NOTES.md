@@ -17,54 +17,39 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 - Select the plugins you need on the installation screen
 - Create an administrator user
 
-## Installing GitLab
+## Installing Bitbucket
 
-- Set `GITLAB_HOME` in `~/.bashrc`
+- Navigate to `localhost:7990`
+- Set up a license
+- Use password: `bwD2!b8BJGEHz6H`
+- Create a new project named `CICD`
+- Create a new repository named `CICD`
+- Add or create a ssh key
+- Push the project
 
-```bash
-export GITLAB_HOME=/srv/gitlab
-```
+## Configuring Bitbucket for Jenkins
 
-- Show how `ssh` keys can be used
-- Show how we can push `master` to GitLab now
-- Protect `master` branch
-- Show how we can't push anymore
+- In *Bitbucket* create an access token in `Manage Account > Personal access tokens`
+  - Add a name
+  - Add `Admin` permissions
+  - Then create the token. It will look like this: `NTk5MDEyNTcwNzEyOqJHsz91td4WP3Si4TvklZ1qZos0`
+- In *Jenkins* Install `Bitbucket Server Integration` plugin
+- Go to `Manage Jenkins > Configure System`
+- In `Bitbucket Endpoints`
+  - Use `Bitubcket Server` as name
+  - Instance URL is `http://bitbucket:7990`
+  - Use the personal access token created above
+- Click **Save**
 
-## Configuring GitLab for Jenkins
-
-- Create a new user `jenkins`, use password `bwD2!b8BJGEHz6H`
-- Add `jenkins` to the `cicd` project
-- Impersonate `jenkins`
-- Go to `Avatar > Settings > Access Tokens` and create an access token with the `api` scope. It will
-  look like this: `BpoqsrgQsVF-gxFkHppb`
-- In Jenkins go to `Manage Jenkins > Configure System`
-- In the `GitLab` section add credentials using the *Jenkins Credential Provider* and choose *GitLab API Token*
-- Paste the API Token
-- Save and choose the credential we created. Use `gitlab` as connection name and `http://gitlab` as URL
-- Test the connection
-- **Save** the config
 
 ## Configuring Continuous Integration (Jenkins)
 
-- In *Jenkins* go to *New Item*
-- Enter `CICD Demo` as name
-- Choose *Freestyle Project*
-- Choose the *GitLab* connection
-- Check the *Build when a change is pushed to GitLab* checkbox.
-- Check the following checkboxes:
-  - Accepted Merge Request Events
-  - Closed Merge Request Events
-- In the Post-build Actions section, choose *Publish build status to GitLab*
-- **Save**
+- Create a new *Pipeline* with name `CICD`
+- In *Build Triggers* select `Bitbucket Server trigger build after push`
+- In *Pipeline* select `Pipeline script from SCM`
+- Select `Bitbucket Server`
 
-## Configuring Continuous Integration (GitLab)
 
-- On *GitLab* go to `Admin Area > Service Templates`
-- Pick `Jenkins CI`
-- Toggle `Enable Integration`
-- Choose `Push`, `Merge Request` and `Tag Push` as *triggers*
-- Set *Jenkins url* to `http://jenkins-blueocean:8080`
-- Set *Project name* to `CICD Demo`
-- Set `username/password`
+## Configuring Continuous Integration (Bitbucket)
 
 

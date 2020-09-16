@@ -2,9 +2,10 @@
 echo "Creating network 'cicd'..."
 docker network create cicd
 
-echo "Creating Jenkins volumes..."
+echo "Creating volumes..."
 docker volume create jenkins-docker-certs
 docker volume create jenkins-data
+docker volume create bitbucket
 
 # This enables Jenkins to run Docker commands on its nodes.
 echo "Starting Docker in Docker..."
@@ -23,15 +24,11 @@ docker run --name jenkins-blueocean --detach \
   --volume jenkins-docker-certs:/certs/client:ro \
   --publish 8080:8080 --publish 50000:50000 jenkinsci/blueocean
 
-echo "Starting GitLab..."
-docker run --name gitlab --detach \
+echo "Starting BitBucket..."
+docker run --name bitbucket --detach \
   --network cicd \
   --privileged \
-  --env GITLAB_ROOT_EMAIL=adam.arold@gmail.com \
-  --hostname localhost \
-  --env GITLAB_OMNIBUS_CONFIG="external_url 'http://localhost'; gitlab_rails['lfs_enabled'] = true;" \
-  --publish 8443:443 --publish 8082:80 --publish 22:22 \
-  --volume "$GITLAB_HOME"/config:/etc/gitlab \
-  --volume "$GITLAB_HOME"/logs:/var/log/gitlab \
-  --volume "$GITLAB_HOME"/data:/var/opt/gitlab \
-  gitlab/gitlab-ee:latest
+  --volume bitbucket:/var/atlassian/application-data/bitbucket \
+  --publish 7990:7990 \
+  --publish 7999:7999 \
+  atlassian/bitbucket-server \
