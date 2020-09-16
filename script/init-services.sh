@@ -37,4 +37,4 @@ docker run --name bitbucket --detach \
 docker run --name sonarqube --detach \
   --network cicd \
   --publish 9000:9000 \
-  sonarqube/7.9.4-community
+  sonarqube:7.9.4-community

@@ -17,6 +17,9 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 - Select the plugins you need on the installation screen
 - Create an administrator user
 
+> Note: use the same email + password combination throughout this tutorial!
+> Also create a ssh key for that email!
+
 ## Installing Bitbucket
 
 - Navigate to `localhost:7990`
