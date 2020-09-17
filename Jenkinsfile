@@ -21,17 +21,26 @@ pipeline {
                 }
             }
         }
-        stage('Jacoco') {
+        stage('Coverage') {
             steps {
                 sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test --fail-at-end -DskipTests=false -am'
             }
         }
-        stage('Sonar') {
+        stage('Code Quality') {
             steps {
                 withSonarQubeEnv('sonarqube') {
                     sh 'mvn -e sonar:sonar'
                 }
             }
         }
+        stage('Deploy to Staging') {
+            when {
+                branch 'dev'
+            }
+            steps {
+                echo 'Deploying to Staging'
+            }
+        }
+
     }
 }
