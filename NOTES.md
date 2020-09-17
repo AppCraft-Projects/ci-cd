@@ -79,6 +79,7 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 - Log in to SonarQube at `http://sonarqube:9000` with `admin`/`admin`
 - Create a project and generate a token. It will look like this: `f529a61c801dfe9e1e848a74f543ea129e4bdfc1`
 - Install the `SonarQube Scanner` plugin to *Jenkins*
+- Install the `SonarQube` plugin in Bitbucket and set it up with the token above
 - Add Sonar to the `Jenkinsfile`:
 
 ```
@@ -91,3 +92,16 @@ stage('Sonar') {
     }
 }
 ```
+- Now push the code. We'll see 0% coverage in SonarQube
+- Set up Jacoco:
+
+```
+stage('Jacoco') {
+    steps {
+        sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test --fail-at-end -DskipTests=false -am'
+    }
+}
+```
+
+- Push it and now we'll see proper coverage reports in SonarQube
+
