@@ -303,3 +303,19 @@ stage('Sonar') {
     }
 }
 ```
+
+- Now we'll set up how to pause pipeline until *Quality Gate* is computed
+- Create a webhook using `http://jenkins-blueocean:8080/sonarqube-webhook/` in *SonarQube*
+- Add this to the *Jenkinsfile*
+
+```shell script
+stage("Quality Gate"){
+  timeout(time: 5, unit: 'MINUTES') {
+    def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+    if (qg.status != 'OK') {
+      error "Pipeline aborted due to quality gate failure: ${qg.status}"
+    }
+  }
+}
+```
+    
