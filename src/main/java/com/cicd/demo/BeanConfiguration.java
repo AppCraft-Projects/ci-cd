@@ -29,6 +29,7 @@ public class BeanConfiguration {
 
     @PostConstruct
     public void createStubs() {
+        throw new RuntimeException();
         Product fcond = new Product(
                 null,
                 "Fuel Conditioner",

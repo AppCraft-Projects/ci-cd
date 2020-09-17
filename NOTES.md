@@ -62,3 +62,11 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 - Select `Project-based Matrix Authorization Strategy` under `Authorization`
 - Set permission for Anonymous User to `Read`, `Create` and `Build`
 
+## Configuring PR Workflow
+
+- In *Bitbucket* go to *Branch Permissions* in the `cicd` repository
+- Prevent `Changes without a pull request` for the `master` branch
+- Try to push to master
+- Create a new branch `dev` and create a PR from there
+- We will see that the Jenkins build is in progress
+- Now break the code and push it again
