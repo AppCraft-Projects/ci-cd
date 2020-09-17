@@ -78,8 +78,16 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 
 - Log in to SonarQube at `http://sonarqube:9000` with `admin`/`admin`
 - Create a project and generate a token. It will look like this: `f529a61c801dfe9e1e848a74f543ea129e4bdfc1`
+- Install the `SonarQube Scanner` plugin to *Jenkins*
 - Add Sonar to the `Jenkinsfile`:
 
 ```
-
+stage('Sonar') {
+    steps {
+        sh 'mvn -e sonar:sonar \
+              -Dsonar.projectKey=cicd \
+              -Dsonar.host.url=http://sonarqube:9000 \
+              -Dsonar.login=f529a61c801dfe9e1e848a74f543ea129e4bdfc1'
+    }
+}
 ```
