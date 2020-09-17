@@ -34,16 +34,25 @@ pipeline {
             }
         }
         stage('Deploy to Staging') {
+            environment {
+                HEROKU_API_KEY = credentials('HEROKU_API_KEY')
+            }
             when {
                 branch 'dev'
             }
             steps {
                 echo 'Deploying to Staging'
+                sh 'mvn heroku:deploy -P staging`'
             }
         }
         stage('Deploy to Prod') {
             when {
+                beforeInput true
                 branch 'master'
+            }
+            input {
+                message "Deploy to production?"
+                id "simple-input"
             }
             steps {
                 echo 'Deploying to Prod'

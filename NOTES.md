@@ -305,13 +305,80 @@ stage('Sonar') {
 }
 ```
 
-## Continuous Deployment of `dev`
+## Heroku Deployment
 
+> We need to install the Heroku CLI here to handle login (we also need to register probably).
+
+- Add the Heroku Maven plugin:
+
+```xml
+<plugin>
+    <groupId>com.heroku.sdk</groupId>
+    <artifactId>heroku-maven-plugin</artifactId>
+    <version>3.0.4</version>
+    <configuration>
+        <jdkVersion>1.8</jdkVersion>
+        <processTypes>
+            <web>
+                java -Dserver.port=$PORT $JAVA_OPTS -jar target/*.jar
+            </web>
+        </processTypes>
+    </configuration>
+</plugin>
+```
+- Add profiles for `staging` and `prod`:
+
+```xml
+<profiles>
+	<profile>
+		<id>staging</id>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>com.heroku.sdk</groupId>
+					<artifactId>heroku-maven-plugin</artifactId>
+					<configuration>
+						<appName>t360-cicd-staging</appName>
+					</configuration>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+	<profile>
+		<id>prod</id>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>com.heroku.sdk</groupId>
+					<artifactId>heroku-maven-plugin</artifactId>
+					<configuration>
+						<appName>t360-cicd-prod</appName>
+					</configuration>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+</profiles>
+```
+- Create staging and prod apps:
 ```shell script
-stage('Sanity check') {
-    steps {
-        input "Does the staging environment look ok?"
-    }
-}
+heroku apps:create --region eu t360-cicd-staging --remote staging
+heroku apps:create --region eu t360-cicd-prod --remote prod
 ```
 
+> Note that they'll need to create apps with different names
+
+- Test deployment to `staging`: `mvn heroku:deploy -P staging`
+
+## Continuous Deployment with Jenkins
+
+- Create a Heroku API key
+- 
+
+```shell script
+...
+```
+
+
+
+- Show a complex config: `https://gist.github.com/mskutin/3b13e089eedcd365ac9a9af30ef503d2`
