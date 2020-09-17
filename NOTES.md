@@ -256,18 +256,17 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 ## Setting up Sonarqube Checks
 
 - Log in to SonarQube at `http://sonarqube:9000` with `admin`/`admin`
-- Create a project and generate a token. It will look like this: `f529a61c801dfe9e1e848a74f543ea129e4bdfc1`
-- Install the `SonarQube Scanner` plugin to *Jenkins*
+    - Create a project and generate a token. It will look like this: `f529a61c801dfe9e1e848a74f543ea129e4bdfc1`
 - Install the `SonarQube` plugin in Bitbucket and set it up with the token above
-- Set up a trial license (disable Privacy Badger and other similar tools)
+    - Set up a trial license (disable Privacy Badger and other similar tools)
 - Add Sonar to the `Jenkinsfile`:
 
-```
+```shell script
 stage('Sonar') {
     steps {
         sh 'mvn -e sonar:sonar \
               -Dsonar.projectKey=cicd \
-              -Dsonar.host.url=http://sonarqube:9000 \
+              -Dsonar.host.url=http://172.20.0.5:9000 \
               -Dsonar.login=f529a61c801dfe9e1e848a74f543ea129e4bdfc1'
     }
 }
@@ -275,7 +274,7 @@ stage('Sonar') {
 - Now push the code. We'll see 0% coverage in SonarQube
 - Set up Jacoco:
 
-```
+```shell script
 stage('Jacoco') {
     steps {
         sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test --fail-at-end -DskipTests=false -am'
@@ -283,7 +282,22 @@ stage('Jacoco') {
 }
 ```
 
-- Push it and now we'll see proper coverage reports in SonarQube
-
 > Note that the proper reports won't be present in BitBucket because we don't have a license for SonarQube
 
+- Push it and now we'll see proper coverage reports in SonarQube
+
+## Setting Up SonarQube Scanner
+
+- Install the `SonarQube Scanner` plugin to *Jenkins*
+    - In `Manage Jenkins > Configure System` go to `SonarQube servers` and set it up
+    - Use `Secret Test` for the token
+    - Check `Enable injection of SonarQube server configuration as build environment variables`
+    - Now replace the `Sonar` stage with the following:
+
+```shell script
+stage('Sonar') {
+    withSonarQubeEnv('sonarqube') {
+        sh 'mvn -e sonar:sonar'
+    } // submitted SonarQube taskId is automatically attached to the pipeline context
+}
+```
