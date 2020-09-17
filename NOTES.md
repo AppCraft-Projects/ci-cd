@@ -311,17 +311,7 @@ stage('Sonar') {
 ```shell script
 stage("Quality Gate"){
   timeout(time: 5, unit: 'MINUTES') {
-    def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
-    if (qg.status != 'OK') {
-      error "Pipeline aborted due to quality gate failure: ${qg.status}"
-    }
+      // we wait for qality gate to finish
   }
 }
 ```
-- Note that this won't work we'll have to replace `pipeline` with `node` and the `agent` block with
-
-```shell script
-docker.image('maven:3-alpine').withRun('-v /root/.m2:/root/.m2')
-```
-
-- We also need to delete `stages`
