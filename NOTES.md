@@ -318,4 +318,4 @@ stage("Quality Gate"){
   }
 }
 ```
-    
+- Note that this won't work we'll have to replace `pipeline` with `node`
