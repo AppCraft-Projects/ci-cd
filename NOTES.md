@@ -70,3 +70,7 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 - Create a new branch `dev` and create a PR from there
 - We will see that the Jenkins build is in progress
 - Now break the code and push it again
+- This will trigger another build that will fail
+- In *Repository Settings* add *Merge checks*
+- Now try to merge again
+
