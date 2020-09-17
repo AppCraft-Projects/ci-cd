@@ -45,21 +45,22 @@ pipeline {
                 sh 'mvn heroku:deploy -DskipTests=true -P staging'
             }
         }
-stage('Deploy to Prod') {
-    environment {
-        HEROKU_API_KEY = credentials('HEROKU_API_KEY')
-    }
-    when {
-        beforeInput true
-        branch 'master'
-    }
-    input {
-        message "Deploy to production?"
-        id "simple-input"
-    }
-    steps {
-        echo 'Deploying to Prod'
-    }
-}
+        stage('Deploy to Prod') {
+            environment {
+                HEROKU_API_KEY = credentials('HEROKU_API_KEY')
+            }
+            when {
+                beforeInput true
+                branch 'master'
+            }
+            input {
+                message "Deploy to production?"
+                id "simple-input"
+            }
+            steps {
+                echo 'Deploying to Prod'
+                sh 'mvn heroku:deploy -DskipTests=true -P prod'
+            }
+        }
     }
 }

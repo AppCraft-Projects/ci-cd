@@ -426,6 +426,7 @@ stage('Deploy to Prod') {
     }
     steps {
         echo 'Deploying to Prod'
+        sh 'mvn heroku:deploy -DskipTests=true -P prod'
     }
 }
 ```
