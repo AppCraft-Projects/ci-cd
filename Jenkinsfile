@@ -23,10 +23,7 @@ pipeline {
         }
         stage('Sonar') {
             steps {
-                sh 'mvn sonar:sonar \
-                      -Dsonar.projectKey=cicd \
-                      -Dsonar.host.url=http://sonarqube:9000 \
-                      -Dsonar.login=f529a61c801dfe9e1e848a74f543ea129e4bdfc1'
+                sh 'mvn sonar:sonar -Dsonar.projectKey=cicd -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=f529a61c801dfe9e1e848a74f543ea129e4bdfc1'
             }
         }
     }
