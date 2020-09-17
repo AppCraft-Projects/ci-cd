@@ -33,7 +33,7 @@ docker run --name bitbucket --detach \
   --publish 7999:7999 \
   atlassian/bitbucket-server \
 
-
+echo "Starting SonarQube..."
 docker run --name sonarqube --detach \
   --network cicd \
   --publish 9000:9000 \

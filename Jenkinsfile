@@ -21,5 +21,18 @@ pipeline {
                 }
             }
         }
+        stage('Jacoco') {
+            steps {
+                sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test --fail-at-end -DskipTests=false -am'
+            }
+        }
+        stage('Sonar') {
+            steps {
+                sh 'mvn -e sonar:sonar \
+                      -Dsonar.projectKey=cicd \
+                      -Dsonar.host.url=http://172.20.0.5:9000 \
+                      -Dsonar.login=f529a61c801dfe9e1e848a74f543ea129e4bdfc1'
+            }
+        }
     }
 }
