@@ -409,10 +409,27 @@ public class IndexController {
 ```
 
 - Try to deploy it to staging
+- Add a new stage for `prod`:
 
-```shell script
-...
+```groovy
+stage('Deploy to Prod') {
+    environment {
+        HEROKU_API_KEY = credentials('HEROKU_API_KEY')
+    }
+    when {
+        beforeInput true
+        branch 'master'
+    }
+    input {
+        message "Deploy to production?"
+        id "simple-input"
+    }
+    steps {
+        echo 'Deploying to Prod'
+    }
+}
 ```
+- Try it by creating and merging a PR to `master`
 
 
 
