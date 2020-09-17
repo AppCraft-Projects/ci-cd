@@ -323,3 +323,5 @@ stage("Quality Gate"){
 ```shell script
 docker.image('maven:3-alpine').withRun('-v /root/.m2:/root/.m2')
 ```
+
+- We also need to delete `stages`
