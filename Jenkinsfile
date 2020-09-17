@@ -21,11 +21,7 @@ pipeline {
                 }
             }
         }
-        stage('Jacoco') {
-            steps {
-                sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test --fail-at-end -DskipTests=false -am'
-            }
-        }
+
         stage('Sonar') {
             steps {
                 sh 'mvn -e sonar:sonar \
