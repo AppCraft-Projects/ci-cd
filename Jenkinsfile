@@ -34,9 +34,11 @@ pipeline {
             }
         }
         stage("Quality Gate"){
-          timeout(time: 5, unit: 'MINUTES') {
-              // we wait for quality gate to finish
-          }
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    // we wait for quality gate to finish
+                }
+            }
         }
     }
 }

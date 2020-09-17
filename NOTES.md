@@ -311,7 +311,7 @@ stage('Sonar') {
 ```shell script
 stage("Quality Gate"){
   timeout(time: 5, unit: 'MINUTES') {
-      // we wait for qality gate to finish
+      // we wait for quality gate to finish
   }
 }
 ```
