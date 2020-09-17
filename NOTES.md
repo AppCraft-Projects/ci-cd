@@ -105,4 +105,5 @@ stage('Jacoco') {
 ```
 
 - Push it and now we'll see proper coverage reports in SonarQube
+- This concludes SonarQube setup
 
