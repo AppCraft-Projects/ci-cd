@@ -53,13 +53,13 @@ public class BeanConfiguration {
         userRepository.save(new User(null, "Ragman"));
 
         inventoryRepository.save(new Inventory(
-                null, fcond, 42765L
+                null, fcond, 648L
         ));
         inventoryRepository.save(new Inventory(
-                null, fcond, 42765L
+                null, paracord, 362L
         ));
         inventoryRepository.save(new Inventory(
-                null, fcond, 42765L
+                null, cofdm, 18L
         ));
     }
 }
