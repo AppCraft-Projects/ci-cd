@@ -80,6 +80,7 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 - Create a project and generate a token. It will look like this: `f529a61c801dfe9e1e848a74f543ea129e4bdfc1`
 - Install the `SonarQube Scanner` plugin to *Jenkins*
 - Install the `SonarQube` plugin in Bitbucket and set it up with the token above
+- Set up a trial license (disable Privacy Badger and other similar tools)
 - Add Sonar to the `Jenkinsfile`:
 
 ```
