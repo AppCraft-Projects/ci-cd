@@ -41,6 +41,5 @@ pipeline {
                 echo 'Deploying to Staging'
             }
         }
-
     }
 }
