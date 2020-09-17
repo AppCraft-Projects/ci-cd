@@ -292,6 +292,7 @@ stage('Jacoco') {
     - In `Manage Jenkins > Configure System` go to `SonarQube servers` and set it up
     - Use `Secret Test` for the token
     - Check `Enable injection of SonarQube server configuration as build environment variables`
+    - Create a webhook using `http://jenkins-blueocean:8080/sonarqube-webhook/` in *SonarQube*
     - Now replace the `Sonar` stage with the following:
 
 ```shell script
@@ -299,19 +300,7 @@ stage('Sonar') {
     steps {
         withSonarQubeEnv('sonarqube') {
             sh 'mvn -e sonar:sonar'
-        } // submitted SonarQube taskId is automatically attached to the pipeline context
+        }
     }
-}
-```
-
-- Now we'll set up how to pause pipeline until *Quality Gate* is computed
-- Create a webhook using `http://jenkins-blueocean:8080/sonarqube-webhook/` in *SonarQube*
-- Add this to the *Jenkinsfile*
-
-```shell script
-stage("Quality Gate"){
-  timeout(time: 5, unit: 'MINUTES') {
-      // we wait for quality gate to finish
-  }
 }
 ```

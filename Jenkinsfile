@@ -30,14 +30,6 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonarqube') {
                     sh 'mvn -e sonar:sonar'
-                } // submitted SonarQube taskId is automatically attached to the pipeline context
-            }
-        }
-        stage("Quality Gate"){
-            steps {
-                timeout(time: 5, unit: 'MINUTES') {
-                    // we wait for quality gate to finish
-                }
             }
         }
     }
