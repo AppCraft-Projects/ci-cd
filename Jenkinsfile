@@ -1,5 +1,5 @@
 node {
-    docker.image('maven:3-alpine').withRun('-v /root/.m2:/root/.m2')
+    docker.image('maven:3-alpine').withRun('-v /root/.m2:/root/.m2') {}
     options {
         skipStagesAfterUnstable()
     }
