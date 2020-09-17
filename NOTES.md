@@ -74,3 +74,12 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 - In *Repository Settings* add *Merge checks*
 - Now try to merge again
 
+## Setting up Sonarqube Checks
+
+- Log in to SonarQube at `http://sonarqube:9000` with `admin`/`admin`
+- Create a project and generate a token. It will look like this: `f529a61c801dfe9e1e848a74f543ea129e4bdfc1`
+- Add Sonar to the `Jenkinsfile`:
+
+```
+
+```
