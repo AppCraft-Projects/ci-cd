@@ -42,7 +42,7 @@ pipeline {
             }
             steps {
                 echo 'Deploying to Staging'
-                sh 'mvn heroku:deploy -P staging`'
+                sh 'mvn heroku:deploy -DskipTests=true -P staging'
             }
         }
         stage('Deploy to Prod') {
