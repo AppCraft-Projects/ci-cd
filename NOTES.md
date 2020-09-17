@@ -318,4 +318,8 @@ stage("Quality Gate"){
   }
 }
 ```
-- Note that this won't work we'll have to replace `pipeline` with `node`
+- Note that this won't work we'll have to replace `pipeline` with `node` and the `agent` block with
+
+```shell script
+docker.image('maven:3-alpine').withRun('-v /root/.m2:/root/.m2')
+```
