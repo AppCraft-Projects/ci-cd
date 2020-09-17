@@ -41,5 +41,13 @@ pipeline {
                 echo 'Deploying to Staging'
             }
         }
+        stage('Deploy to Prod') {
+            when {
+                branch 'master'
+            }
+            steps {
+                echo 'Deploying to Prod'
+            }
+        }
     }
 }
