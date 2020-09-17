@@ -46,6 +46,9 @@ pipeline {
             }
         }
         stage('Deploy to Prod') {
+            environment {
+                HEROKU_API_KEY = credentials('HEROKU_API_KEY')
+            }
             when {
                 beforeInput true
                 branch 'master'

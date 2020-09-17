@@ -373,7 +373,42 @@ heroku apps:create --region eu t360-cicd-prod --remote prod
 ## Continuous Deployment with Jenkins
 
 - Create a Heroku API key
-- 
+- Add it as a credential to *Jenkins* with the key `HEROKU_API_KEY`
+- Add a new stage to the `Jenkinsfile`:
+
+```groovy
+stage('Deploy to Staging') {
+    environment {
+        HEROKU_API_KEY = credentials('HEROKU_API_KEY')
+    }
+    when {
+        branch 'dev'
+    }
+    steps {
+        echo 'Deploying to Staging'
+        sh 'mvn heroku:deploy -DskipTests=true -P staging'
+    }
+}
+```
+- Add an index page to our app:
+
+```java
+package com.cicd.demo;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class IndexController {
+
+    @GetMapping("/")
+    public String hello() {
+        return "Hello, world!";
+    }
+}
+```
+
+- Try to deploy it to staging
 
 ```shell script
 ...
