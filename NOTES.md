@@ -246,7 +246,6 @@ pipeline {
         }
     }
 }
-
 ```
 - In *Jenkins* Install `Bitbucket Server Integration`
 - Go to `Manage Jenkins > Configure System`
@@ -302,7 +301,7 @@ stage('Sonar') {
 }
 ```
 - Now push the code. We'll see 0% coverage in SonarQube
-- Set up Jacoco:
+- Set up Jacoco **before** sonar:
 
 ```shell script
 stage('Jacoco') {

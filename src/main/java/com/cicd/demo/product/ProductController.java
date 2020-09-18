@@ -2,7 +2,6 @@ package com.cicd.demo.product;
 
 import com.cicd.demo.config.FeatureConfig;
 import com.cicd.demo.dto.ProductDto;
-import com.cicd.demo.shared.CurrencyConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static com.cicd.demo.product.Currency.HUF;
+import com.cicd.demo.shared.CurrencyConverter;
+import static com.cicd.demo.shared.Currency.HUF;
 
 @SuppressWarnings("unused")
 @RestController

@@ -1,17 +1,15 @@
 package com.cicd.demo.shared;
 
-import com.cicd.demo.product.Currency;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import static com.cicd.demo.product.Currency.EUR;
-import static com.cicd.demo.product.Currency.HUF;
+import static com.cicd.demo.shared.Currency.EUR;
+import static com.cicd.demo.shared.Currency.HUF;
 
 public class CurrencyConverter {
 
-    private Map<String, Function<Long, Long>> lookup = new HashMap<>();
+    private final Map<String, Function<Long, Long>> lookup = new HashMap<>();
 
     {
         lookup.put(HUF.name() + HUF.name(), price -> price);

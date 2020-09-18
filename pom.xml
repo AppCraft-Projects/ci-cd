@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.3.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>com.cicd</groupId>
 	<artifactId>ci-cd-demo</artifactId>
@@ -17,6 +17,14 @@
 	<properties>
 		<java.version>8</java.version>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>ci-cd-shared</id>
+			<name>ci-cd-shared</name>
+			<url>http://nexus:8081/repository/ci-cd-shared/</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -67,6 +75,11 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.cicd</groupId>
+			<artifactId>ci-cd-shared</artifactId>
+			<version>0.0.1-20200918.194424-1</version>
 		</dependency>
 	</dependencies>
 
