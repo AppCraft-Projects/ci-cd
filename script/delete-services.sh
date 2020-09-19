@@ -8,6 +8,7 @@ docker container rm jenkins-docker
 docker container rm jenkins-blueocean
 docker container rm bitbucket
 docker container rm sonarqube
+docker container rm nexus
 
 echo "Cleaning up resources..."
 docker network rm cicd
