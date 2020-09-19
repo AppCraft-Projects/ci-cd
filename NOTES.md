@@ -182,6 +182,8 @@ docker run --publish 8000:8080 --detach --name bb bulletinboard:1.0
     - `RUN` the command npm install inside your image filesystem (which will read `package.json` to determine your
       app’s node dependencies, and install them)
     - `COPY` in the rest of your app’s source code from your host to your image filesystem.
+- Mention *Docker Compose* and *Kubernetes*
+
 
 ## Installing Jenkins
 
@@ -208,6 +210,8 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 - Create a new repository named `CICD`
 - Add or create a ssh key
 - Push the project
+- Talk about *Git* remotes
+
 
 ## Configuring Bitbucket for Jenkins
 
@@ -247,6 +251,11 @@ pipeline {
     }
 }
 ```
+
+- Explain how *Pipeline*s work in Jenkins
+    - `Jenkinsfile`
+    - [docs](https://www.jenkins.io/doc/book/pipeline/)
+    - Declarative vs scripted (Groovy)
 - In *Jenkins* Install `Bitbucket Server Integration`
 - Go to `Manage Jenkins > Configure System`
 - In `Bitbucket Server integration`
@@ -355,7 +364,7 @@ stage('Sonar') {
     </configuration>
 </plugin>
 ```
-- Add profiles for `staging` and `prod`:
+- Add profiles for `staging` and `prod` (also explain profiles):
 
 ```xml
 <profiles>
@@ -677,3 +686,10 @@ docker exec -it nexus cat nexus-data/admin.password
 ```
 - We have to look for the dependency on *Nexus*
     
+## Misc Topics (Optional)
+
+- Implement feature toggle next steps
+- Show how accretion works
+- Implement API versioning
+- Show a Protobuf example
+

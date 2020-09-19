@@ -1,0 +1,21 @@
+server:
+  port: 8082
+spring:
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+
+---
+
+spring:
+  profiles: staging
+features:
+  profile: staging
+  deleteProduct: true
+
+---
+
+spring:
+  profiles: prod
+features:
+  profile: prod
+  deleteProduct: false

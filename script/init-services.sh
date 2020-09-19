@@ -40,6 +40,7 @@ docker run --name sonarqube --detach \
   --publish 9000:9000 \
   sonarqube:7.9.4-community
 
+echo "Starting Nexus..."
 docker run --name nexus --detach \
   --network cicd \
   --publish 8081:8081 \
